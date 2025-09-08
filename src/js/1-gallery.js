@@ -1,3 +1,8 @@
+// Описаний в документації
+import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 const images = [
   {
     preview:
@@ -66,21 +71,13 @@ const images = [
 const list = document.querySelector('.gallery');
 const imagesEl = images
   .map(
-    image => `<li class="gallery-item"><a  class="gallery-link" href="${image.preview}">
+    image => `<li class="gallery-item"><a  class="gallery-link" href="${image.original}">
     <img class="gallery-image" src="${image.preview}" data-source="${image.original}" alt="${image.description}"/> </a></li>`
   )
   .join(' ');
 list.insertAdjacentHTML('beforeend', imagesEl);
 
-// Описаний в документації
-import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
-import 'simplelightbox/dist/simple-lightbox.min.css';
-let gallery = new SimpleLightbox('.gallery a');
-gallery.on('show.simplelightbox', function () {
-  // Do something…
-});
-
-gallery.on('error.simplelightbox', function (e) {
-  console.log(e); // Some usefull information
+new SimpleLightbox('.gallery a', {
+  captionsData: 'alt', // брати підписи з атрибуту alt
+  captionDelay: 250, // затримка перед появою підпису
 });
